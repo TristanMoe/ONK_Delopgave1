@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarpenterAPI.Configuration;
 using CarpenterAPI.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +16,7 @@ namespace CarpenterAPI
         public static void Main(string[] args)
         {
             // Change to db service object IP
-            var dataSeeder = new DataSeeder("mongodb://localhost:27017"); 
+            var dataSeeder = new DataSeeder(AppConfig.ConnectionStringDb); 
             CreateHostBuilder(args).Build().Run();
         }
 

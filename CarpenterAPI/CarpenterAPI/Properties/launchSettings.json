@@ -20,7 +20,7 @@
     "CarpenterAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "api/craftsmen?firstname=Henry&surname=Jensen",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
