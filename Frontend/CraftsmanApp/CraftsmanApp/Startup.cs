@@ -26,13 +26,21 @@ namespace CraftsmanApp
         {
             services.AddHttpClient();
             services.AddRazorPages();
+            var host = Environment.GetEnvironmentVariable("host");
+            var port = Environment.GetEnvironmentVariable("port");
+            var baseAdd = "http://" + host + ":" + port + "/";
+            
 
-            services.AddHttpClient("craftsmen", c =>
+            services.AddHttpClient("toolbox", c =>
             {
-                var host = Environment.GetEnvironmentVariable("host");
-                var port = Environment.GetEnvironmentVariable("port");
+                c.BaseAddress = new Uri(baseAdd + "/api/toolbox/");
 
-                c.BaseAddress = new Uri("http://" + host + ":" + port + "/");
+                c.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
+            services.AddHttpClient("tool", c =>
+            {
+                c.BaseAddress = new Uri(baseAdd + "/api/tool/");
 
                 c.DefaultRequestHeaders.Add("Accept", "application/json");
             });
