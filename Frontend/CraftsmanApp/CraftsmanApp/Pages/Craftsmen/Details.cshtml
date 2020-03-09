@@ -1,0 +1,130 @@
+﻿@page
+@model CraftsmanApp.Pages.Craftsmen.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Craftsman</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Craftsman.EmploymentDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Craftsman.EmploymentDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Craftsman.Surname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Craftsman.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Craftsman.SubjectArea)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Craftsman.SubjectArea)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Craftsman.Firstname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Craftsman.Firstname)
+        </dd>
+    </dl>
+</div>
+@{
+    foreach (var toolbox in Model.Craftsman.ToolBoxes)
+    {
+        <div>
+        <h4>Toolbox</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => toolbox.Purchased)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => toolbox.Purchased)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => toolbox.Brand)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => toolbox.Brand)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => toolbox.Model)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => toolbox.Model)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => toolbox.SerialNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => toolbox.SerialNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => toolbox.Type)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => toolbox.Type)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => toolbox.OwnerId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => toolbox.OwnerId)
+            </dd>
+        </dl>
+        </div>
+        foreach (var tool in toolbox.Tools)
+        {
+            <div>
+                <h4>Tool</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => tool.Purchased)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => tool.Purchased)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => tool.Brand)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => tool.Brand)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => tool.Color)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => tool.Color)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => tool.Model)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => tool.Model)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => tool.SerialNumber)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => tool.SerialNumber)
+                    </dd>
+                </dl>
+            </div>
+        }
+    }
+}
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Craftsman.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

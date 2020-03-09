@@ -59,7 +59,7 @@ spec:
   ports:
   - port: 8080
     protocol: TCP
-    targetPort: 27017
+    targetPort: 80
   selector:
     app: carpenter-mongodb
   sessionAffinity: None

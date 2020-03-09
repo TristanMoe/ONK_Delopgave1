@@ -1,0 +1,55 @@
+﻿@page
+@model CraftsmanApp.Pages.ToolBoxes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Toolbox</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Toolbox.Purchased)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Toolbox.Purchased)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Toolbox.Brand)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Toolbox.Brand)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Toolbox.Model)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Toolbox.Model)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Toolbox.SerialNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Toolbox.SerialNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Toolbox.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Toolbox.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Toolbox.OwnerId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Toolbox.OwnerId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Toolbox.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
