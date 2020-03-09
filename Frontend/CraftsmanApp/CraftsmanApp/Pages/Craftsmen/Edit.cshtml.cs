@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Models;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp.Pages.Craftsmen
 {
     public class EditModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
+        private readonly CraftsmanClient _client;
 
-        public EditModel(CraftsmanApp.Data.CraftsmanAppContext context)
+        public EditModel(CraftsmanApp.Data.CraftsmanAppContext context, CraftsmanClient clientFactory)
         {
-            _context = context;
+            _client = clientFactory;
         }
 
         [BindProperty]
@@ -30,7 +31,7 @@ namespace CraftsmanApp.Pages.Craftsmen
                 return NotFound();
             }
 
-            Craftsman = await _context.Craftsman.FirstOrDefaultAsync(m => m.ID == id);
+            Craftsman = await _client.Get(id);
 
             if (Craftsman == null)
             {
@@ -48,30 +49,15 @@ namespace CraftsmanApp.Pages.Craftsmen
                 return Page();
             }
 
-            _context.Attach(Craftsman).State = EntityState.Modified;
+            var exists = _client.Get(Craftsman.ID);
+            if (exists == null)
+            {
+                await _client.Insert(Craftsman);
+            }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CraftsmanExists(Craftsman.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _client.Update(Craftsman.ID, Craftsman);
 
             return RedirectToPage("./Index");
-        }
-
-        private bool CraftsmanExists(string id)
-        {
-            return _context.Craftsman.Any(e => e.ID == id);
         }
     }
 }

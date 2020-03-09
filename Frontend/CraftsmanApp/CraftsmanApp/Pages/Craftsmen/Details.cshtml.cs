@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Models;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp.Pages.Craftsmen
 {
     public class DetailsModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
+        private readonly CraftsmanClient _client;
 
-        public DetailsModel(CraftsmanApp.Data.CraftsmanAppContext context)
+        public DetailsModel(CraftsmanApp.Data.CraftsmanAppContext context, CraftsmanClient clientFactory)
         {
-            _context = context;
+            _client = clientFactory;
         }
 
         public Craftsman Craftsman { get; set; }
@@ -27,25 +28,13 @@ namespace CraftsmanApp.Pages.Craftsmen
             {
                 return NotFound();
             }
-            Craftsman = await _context.Craftsman.FirstOrDefaultAsync(m => m.ID == id);
+
+            Craftsman = await _client.Get(id);
             if (Craftsman == null)
             {
                 return NotFound();
             }
-            
-            Craftsman.ToolBoxes = await _context.Toolbox.Where(item => item.OwnerId == Craftsman.ID).ToListAsync();
 
-            if (Craftsman.ToolBoxes == null)
-            {
-                Craftsman.ToolBoxes = new List<Toolbox>();
-                return Page();
-            }
-            var tools = await _context.Tool.Where(item => Craftsman.ToolBoxes.Select(box => box.ID).Contains(item.ToolBoxId)).ToListAsync();
-
-            foreach (var toolbox in Craftsman.ToolBoxes)
-            {
-                toolbox.Tools = tools.Where(t => t.ToolBoxId == toolbox.ID).ToList();
-            }
             return Page();
         }
     }

@@ -8,21 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Models;
 using System.Net.Http;
-using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp.Pages.Craftsmen
 {
     public class DeleteModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly HttpClient _client;
+        private readonly CraftsmanClient _client;
 
-        public DeleteModel(CraftsmanApp.Data.CraftsmanAppContext context, IHttpClientFactory clientFactory) {
-            _context = context;
-            _clientFactory = clientFactory;
-            _client = _clientFactory.CreateClient("craftsmen");
+        public DeleteModel(CraftsmanClient clientFactory)
+        {
+            _client = clientFactory;
         }
 
         [BindProperty]
@@ -35,10 +33,7 @@ namespace CraftsmanApp.Pages.Craftsmen
                 return NotFound();
             }
 
-            var response = await _client.GetAsync(id);
-            response.EnsureSuccessStatusCode();
-            using var craftsmanresponseStream
-            Craftsman = await _context.Craftsman.FirstOrDefaultAsync(m => m.ID == id);
+            Craftsman = await _client.Get(id);
 
             if (Craftsman == null)
             {
@@ -54,15 +49,11 @@ namespace CraftsmanApp.Pages.Craftsmen
                 return NotFound();
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Delete, "api/craftsmen/"+Craftsman.ID);
-            await _client.SendAsync(request);
-
-            Craftsman = await _context.Craftsman.FindAsync(id);
+            Craftsman = await _client.Get(id);
 
             if (Craftsman != null)
             {
-                _context.Craftsman.Remove(Craftsman);
-                await _context.SaveChangesAsync();
+                await _client.Delete(id);
             }
 
             return RedirectToPage("./Index");

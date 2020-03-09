@@ -5,18 +5,17 @@ using CraftsmanApp.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp.Pages.Craftsmen
 {
     public class CreateModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
-        private readonly System.Net.Http.IHttpClientFactory _clientFactory;
+        private readonly CraftsmanClient _client;
 
-        public CreateModel(CraftsmanApp.Data.CraftsmanAppContext context, System.Net.Http.IHttpClientFactory clientFactory)
+        public CreateModel(CraftsmanClient clientFactory)
         {
-            _context = context;
-            _clientFactory = clientFactory;
+            _client = clientFactory;
         }
 
         public IActionResult OnGet()
@@ -36,14 +35,8 @@ namespace CraftsmanApp.Pages.Craftsmen
             {
                 return Page();
             }
-            var request = new HttpRequestMessage(HttpMethod.Post, "api/craftsmen/");
-            var content = new StringContent(JsonConvert.SerializeObject(Craftsman), Encoding.UTF8, "application/json");
-            request.Content = content;
-            var client = _clientFactory.CreateClient("craftsmen");
-            await client.SendAsync(request);
 
-            _context.Craftsman.Add(Craftsman);
-            await _context.SaveChangesAsync();
+            await _client.Insert(Craftsman);
 
             return RedirectToPage("./Index");
         }
