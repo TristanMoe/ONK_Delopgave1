@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CarpenterAPI.Domain;
 using CarpenterAPI.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarpenterAPI.Controllers
@@ -21,12 +18,12 @@ namespace CarpenterAPI.Controllers
         }
 
         [HttpGet]
-        public Craftsman GetCraftsman([FromQuery] string firstname, [FromQuery] string surname)
+        public Craftsman GetCraftsman([FromQuery] string id)
         {
             Craftsman cm = null; 
             try
             {
-                cm = _craftmanService.Get(firstname, surname);
+                cm = _craftmanService.Get(id);
             } 
             catch (Exception ex)
             {
@@ -34,5 +31,44 @@ namespace CarpenterAPI.Controllers
             }
             return cm; 
         } 
+
+        [HttpGet]
+        public IEnumerable<Craftsman> GetCraftsmen()
+        {
+            return _craftmanService.GetAll();
+        }
+        
+        [HttpPost]
+        public Craftsman CreateCraftsman([FromBody] Craftsman craftsman)
+        {
+            try
+            {
+                return _craftmanService.Create(craftsman);
+            } 
+            catch(Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+            return craftsman;
+        }
+        
+        [HttpPut]
+        public Craftsman UpdateCraftsman([FromBody] Craftsman craftsman)
+        {
+            try
+            {
+                return _craftmanService.Update(craftsman);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return craftsman;
+        }
+
+        [HttpDelete]
+        public void DeleteCraftsman([FromQuery] string id)
+        {
+            _craftmanService.Delete(id);
+        }
     }
 }

@@ -18,30 +18,35 @@ namespace CarpenterAPI.Services
             _craftsmenCollection = database.GetCollection<Craftsman>("Craftsmen");
         }
 
-        public Craftsman Get(string firstname, string surname)
+        public IEnumerable<Craftsman> GetAll()
         {
-            return _craftsmenCollection.Find(cm => cm.Firstname == firstname && cm.Surname == surname).FirstOrDefault(); 
+            return _craftsmenCollection.Find(_ => true).ToList(); 
         }
 
-        public List<Craftsman> GetAll()
+        public Craftsman Get(string id)
         {
-            return _craftsmenCollection.Find(user => true).ToList(); 
+            return _craftsmenCollection.Find(cm => cm.CraftsmanId == id).FirstOrDefault(); 
         }
 
-        public Craftsman Create(Craftsman craftsman)
+        public Craftsman Create(Craftsman value)
         {
-            var userExists = _craftsmenCollection.Find(cm => cm.CraftsmanId == craftsman.CraftsmanId).FirstOrDefault();
-            if (userExists != null)
+            var craftsman = _craftsmenCollection.Find(cm => cm.CraftsmanId == value.CraftsmanId).FirstOrDefault();
+            if (craftsman == null)
                 throw new Exception("User already exists");
             craftsman.ToolBoxes = new List<Toolbox>();
             _craftsmenCollection.InsertOne(craftsman);
-            return craftsman;         
+            return craftsman;
         }
 
         public Craftsman Update(Craftsman craftsman)
         {
-            _craftsmenCollection.ReplaceOne<Craftsman>(cm => cm.CraftsmanId == craftsman.CraftsmanId, craftsman);
+            _craftsmenCollection.ReplaceOne<>(cm => cm.CraftsmanId == craftsman.CraftsmanId, craftsman);
             return craftsman; 
+        }
+
+        public void Delete(string id)
+        {
+            _craftsmenCollection.DeleteOne(id);
         }
     }
 }

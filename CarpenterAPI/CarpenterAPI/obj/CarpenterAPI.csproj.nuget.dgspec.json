@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {}
+    "C:\\Users\\Mathias\\Documents\\6. semester\\ITONK\\Delprojekt_1\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {
+    "C:\\Users\\Mathias\\Documents\\6. semester\\ITONK\\Delprojekt_1\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Mathias\\Documents\\6. semester\\ITONK\\Delprojekt_1\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
         "projectName": "CarpenterAPI",
-        "projectPath": "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
-        "packagesPath": "C:\\Users\\Trill\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\obj\\",
+        "projectPath": "C:\\Users\\Mathias\\Documents\\6. semester\\ITONK\\Delprojekt_1\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
+        "packagesPath": "C:\\Users\\Mathias\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mathias\\Documents\\6. semester\\ITONK\\Delprojekt_1\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Trill\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mathias\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
