@@ -10,17 +10,16 @@ namespace CarpenterAPI.Controllers
     [ApiController]
     public class ToolboxController : ControllerBase
     {
+        private readonly ToolboxService _toolboxService;
 
-        private readonly ToolBoxService _toolboxService;
-
-        public ToolboxController(ToolBoxService toolboxService)
+        public ToolboxController(ToolboxService toolboxService)
         {
             _toolboxService = toolboxService;
         }
 
         // GET: api/ToolBox
         [HttpGet]
-        public IEnumerable<Toolbox> GetToolbox([FromQuery] string id)
+        public IEnumerable<Toolbox> GetToolbox()
         {
             return _toolboxService.GetAll();
         }
@@ -56,7 +55,7 @@ namespace CarpenterAPI.Controllers
         }
 
         // PUT: api/ToolBox/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public Toolbox UpdateToolbox([FromBody] Toolbox toolbox)
         {
             try
