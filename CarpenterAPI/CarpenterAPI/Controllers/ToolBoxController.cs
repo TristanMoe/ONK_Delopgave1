@@ -25,7 +25,7 @@ namespace CarpenterAPI.Controllers
         }
 
         // GET: api/ToolBox/5
-        [HttpGet]
+        [HttpGet("{id}")]
         public Toolbox Get(string id)
         {
             Toolbox tb = null;
@@ -70,7 +70,7 @@ namespace CarpenterAPI.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public void Delete([FromQuery] string id)
         {
             _toolboxService.Delete(id);

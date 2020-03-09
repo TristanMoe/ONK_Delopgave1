@@ -29,7 +29,7 @@ namespace CarpenterAPI.Services
         public Toolbox Create(Toolbox value)
         {
             var toolbox = _toolboxCollection.Find(tb => tb.ToolboxId == value.ToolboxId).FirstOrDefault();
-            if (toolbox == null)
+            if (toolbox != null)
                 throw new Exception("Toolbox already exists");
             _toolboxCollection.InsertOne(value);
             return toolbox;
@@ -37,7 +37,7 @@ namespace CarpenterAPI.Services
 
         public Toolbox Update(Toolbox toolbox)
         {
-            _toolboxCollection.ReplaceOne<>(tb => tb.ToolboxId == toolbox.ToolboxId, toolbox);
+            _toolboxCollection.ReplaceOne<Toolbox>(tb => tb.ToolboxId == toolbox.ToolboxId, toolbox);
             return toolbox;
         }
 

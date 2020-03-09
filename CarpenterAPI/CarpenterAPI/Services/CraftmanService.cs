@@ -11,6 +11,7 @@ namespace CarpenterAPI.Services
     public class CraftmanService
     {
         private readonly IMongoCollection<Craftsman> _craftsmenCollection;
+        
         public CraftmanService(IConfiguration configuration)
         {
             var mongoClient = new MongoClient(configuration.GetConnectionString("CraftsmanDb"));
@@ -31,22 +32,21 @@ namespace CarpenterAPI.Services
         public Craftsman Create(Craftsman value)
         {
             var craftsman = _craftsmenCollection.Find(cm => cm.CraftsmanId == value.CraftsmanId).FirstOrDefault();
-            if (craftsman == null)
-                throw new Exception("User already exists");
-            craftsman.ToolBoxes = new List<Toolbox>();
-            _craftsmenCollection.InsertOne(craftsman);
-            return craftsman;
+            if (craftsman != null)
+                throw new Exception("Craftsman already exists");
+            _craftsmenCollection.InsertOne(value);
+            return value;
         }
 
-        public Craftsman Update(Craftsman craftsman)
+        public Craftsman Update(string id, Craftsman craftsman)
         {
-            _craftsmenCollection.ReplaceOne<>(cm => cm.CraftsmanId == craftsman.CraftsmanId, craftsman);
-            return craftsman; 
+            _craftsmenCollection.FindOneAndReplace(cm => cm.CraftsmanId == id, craftsman);
+            return craftsman;
         }
 
         public void Delete(string id)
         {
-            _craftsmenCollection.DeleteOne(id);
+            _craftsmenCollection.DeleteOne(cm => cm.CraftsmanId.Equals(id));
         }
     }
 }
