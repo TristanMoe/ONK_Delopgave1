@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ITONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {}
+    "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {}
   },
   "projects": {
-    "C:\\ITONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {
+    "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ITONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
         "projectName": "CarpenterAPI",
-        "projectPath": "C:\\ITONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
-        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\ITONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\obj\\",
+        "projectPath": "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\CarpenterAPI.csproj",
+        "packagesPath": "C:\\Users\\Trill\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Trill\\OneDrive\\Skrivebord\\6. Semester\\ONK\\ONK_Delopgave1\\CarpenterAPI\\CarpenterAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Trill\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

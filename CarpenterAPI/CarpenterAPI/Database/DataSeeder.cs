@@ -37,7 +37,19 @@ namespace CarpenterAPI.Database
                 ToolBoxes = new List<Toolbox>()
             };
 
-            _craftsmanCollection.InsertOne(Henry); 
+            var Bob = new Craftsman()
+            {
+                CraftsmanId = "5cdd705eace4a36e8c3ca1A2",
+                Firstname = "Bob",
+                Surname = "Pedersen",
+                EmploymentDate = DateTime.Today,
+                SubjectArea = "Carpenter",
+                ToolBoxes = new List<Toolbox>()
+            };
+
+
+            _craftsmanCollection.InsertOne(Henry);
+            _craftsmanCollection.InsertOne(Bob);
         }
     }
 }
