@@ -52,7 +52,7 @@ kind: Service
 metadata:
   labels:
     app: carpenter-mongodb
-  name: carpenter-balancer
+  name: carpenter-mongodb-balancer
   namespace: default
 spec:
   externalTrafficPolicy: Cluster
