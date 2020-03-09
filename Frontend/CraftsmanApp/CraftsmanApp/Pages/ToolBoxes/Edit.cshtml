@@ -1,0 +1,60 @@
+﻿@page
+@model CraftsmanApp.Pages.ToolBoxes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Toolbox</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Toolbox.ID" />
+            <div class="form-group">
+                <label asp-for="Toolbox.Purchased" class="control-label"></label>
+                <input asp-for="Toolbox.Purchased" class="form-control" />
+                <span asp-validation-for="Toolbox.Purchased" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Toolbox.Brand" class="control-label"></label>
+                <input asp-for="Toolbox.Brand" class="form-control" />
+                <span asp-validation-for="Toolbox.Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Toolbox.Model" class="control-label"></label>
+                <input asp-for="Toolbox.Model" class="form-control" />
+                <span asp-validation-for="Toolbox.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Toolbox.SerialNumber" class="control-label"></label>
+                <input asp-for="Toolbox.SerialNumber" class="form-control" />
+                <span asp-validation-for="Toolbox.SerialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Toolbox.Type" class="control-label"></label>
+                <input asp-for="Toolbox.Type" class="form-control" />
+                <span asp-validation-for="Toolbox.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Toolbox.OwnerId" class="control-label"></label>
+                <input asp-for="Toolbox.OwnerId" class="form-control" />
+                <span asp-validation-for="Toolbox.OwnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
