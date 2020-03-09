@@ -15,7 +15,7 @@ namespace CraftsmanApp.Pages.Craftsmen
     {
         private readonly CraftsmanClient _client;
 
-        public DetailsModel(CraftsmanApp.Data.CraftsmanAppContext context, CraftsmanClient clientFactory)
+        public DetailsModel( CraftsmanClient clientFactory)
         {
             _client = clientFactory;
         }

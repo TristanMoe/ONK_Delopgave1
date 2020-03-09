@@ -39,7 +39,7 @@ namespace CraftsmanApp.Services
         {
             var response = await _client.GetAsync(id);
             response.EnsureSuccessStatusCode();
-            using var responseStream = await response.Content.ReadAsStreamAsync();
+            await using var responseStream = await response.Content.ReadAsStreamAsync();
             return await JsonSerializer.DeserializeAsync<Models.Craftsman>(responseStream);
         }
 
@@ -51,7 +51,7 @@ namespace CraftsmanApp.Services
 
         public async Task Insert(Craftsman craftsman)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "api/craftsmen/");
+            var request = new HttpRequestMessage(HttpMethod.Post, "");
             var content = new StringContent(JsonConvert.SerializeObject(craftsman), Encoding.UTF8, "application/json");
             request.Content = content;
             var response = await _client.SendAsync(request);
