@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp
 {
@@ -29,8 +30,8 @@ namespace CraftsmanApp
             var host = Environment.GetEnvironmentVariable("host");
             var port = Environment.GetEnvironmentVariable("port");
             var baseAdd = "http://" + host + ":" + port + "/";
-            
 
+            services.AddHttpClient<CraftsmanClient>();
             services.AddHttpClient("toolbox", c =>
             {
                 c.BaseAddress = new Uri(baseAdd + "/api/toolbox/");

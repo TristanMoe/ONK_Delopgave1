@@ -7,23 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Models;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp.Pages.Craftsmen
 {
     public class IndexModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
+        private readonly CraftsmanClient _client;
 
-        public IndexModel(CraftsmanApp.Data.CraftsmanAppContext context)
+        public IndexModel(CraftsmanClient clientFactory)
         {
-            _context = context;
+            _client = clientFactory;
         }
 
         public IList<Craftsman> Craftsman { get; set; }
 
         public async Task OnGetAsync()
         {
-            Craftsman = await _context.Craftsman.ToListAsync();
+            Craftsman = (await _client.GetAll()).ToList();
 
         }
     }
