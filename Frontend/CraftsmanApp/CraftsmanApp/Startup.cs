@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Services;
+using CraftsmanApp.Configuration;
 
 namespace CraftsmanApp
 {
@@ -27,8 +28,8 @@ namespace CraftsmanApp
         {
             services.AddHttpClient();
             services.AddRazorPages();
-            var host = Environment.GetEnvironmentVariable("host");
-            var port = Environment.GetEnvironmentVariable("port");
+            var host = AppConfig.GetServiceIP;
+            var port = AppConfig.GetServicePort;
             var baseAdd = "http://" + host + ":" + port + "/";
 
             services.AddHttpClient<CraftsmanClient>();
