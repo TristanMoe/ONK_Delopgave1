@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CarpenterAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using CarpenterAPI.Domain;
@@ -17,63 +18,44 @@ namespace CarpenterAPI.Controllers
             _toolboxService = toolboxService;
         }
 
-        // GET: api/ToolBox
-        [HttpGet]
-        public IEnumerable<Toolbox> GetToolbox()
+        // GET: api/toolbox || api/toolbox?id=5
+        [HttpGet("{id?}")]
+        public async Task<IEnumerable<Toolbox>> Get([FromQuery] string id)
         {
-            return _toolboxService.GetAll();
+            if (!Request.QueryString.HasValue)
+                return await _toolboxService.GetAll();
+
+            Toolbox tb = await _toolboxService.Get(id);
+            return new[] {tb};
         }
 
-        // GET: api/ToolBox/5
-        [HttpGet("{id}")]
-        public Toolbox Get(string id)
+        // POST: api/toolbox
+        [HttpPost]
+        public async Task<Toolbox> Post([FromBody] Toolbox toolbox)
         {
-            Toolbox tb = null;
             try
             {
-                tb = _toolboxService.Get(id);
+                return await _toolboxService.Create(toolbox);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            return tb;
-        }
-
-        // POST: api/ToolBox
-        [HttpPost]
-        public Toolbox CreateToolbox([FromBody] Toolbox toolbox)
-        {            
-            try
-            {
-                return _toolboxService.Create(toolbox);
-            } 
-            catch(Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
             return toolbox;
         }
 
-        // PUT: api/ToolBox/5
+        // PUT: api/toolbox
         [HttpPut]
-        public Toolbox UpdateToolbox([FromBody] Toolbox toolbox)
+        public async Task<Toolbox> Put([FromBody] Toolbox toolbox)
         {
-            try
-            {
-                return _toolboxService.Update(toolbox);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return toolbox;
+            return await _toolboxService.Update(toolbox);
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/toolbox/delete?id=5
         [HttpDelete("{id}")]
-        public void Delete([FromQuery] string id)
+        public async Task Delete([FromQuery] string id)
         {
-            _toolboxService.Delete(id);
+            await _toolboxService.Delete(id);
         }
     }
 }

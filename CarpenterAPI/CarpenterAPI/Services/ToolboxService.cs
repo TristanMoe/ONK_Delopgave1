@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CarpenterAPI.Services
 {
@@ -16,34 +17,33 @@ namespace CarpenterAPI.Services
             _toolboxCollection = database.GetCollection<Toolbox>("Toolboxes");
         }
 
-        public IEnumerable<Toolbox> GetAll()
+        public async Task<IEnumerable<Toolbox>> GetAll()
         {
-            return _toolboxCollection.Find(_ => true).ToList();
+            return await _toolboxCollection.FindAsync(_ => true).Result.ToListAsync();
         }
 
-        public Toolbox Get(string id)
+        public async Task<Toolbox> Get(string id)
         {
-            return _toolboxCollection.Find(tb => tb.ToolboxId == id).FirstOrDefault();
+            return await _toolboxCollection.FindAsync(tb => tb.ToolboxId == id).Result.FirstOrDefaultAsync();
         }
 
-        public Toolbox Create(Toolbox value)
+        public async Task<Toolbox> Create(Toolbox value)
         {
-            var toolbox = _toolboxCollection.Find(tb => tb.ToolboxId == value.ToolboxId).FirstOrDefault();
+            var toolbox = await _toolboxCollection.FindAsync(tb => tb.ToolboxId == value.ToolboxId).Result.FirstOrDefaultAsync();
             if (toolbox != null)
                 throw new Exception("Toolbox already exists");
-            _toolboxCollection.InsertOne(value);
-            return toolbox;
+            await _toolboxCollection.InsertOneAsync(value);
+            return value;
         }
 
-        public Toolbox Update(Toolbox toolbox)
+        public async Task<Toolbox> Update(Toolbox toolbox)
         {
-            _toolboxCollection.ReplaceOne<Toolbox>(tb => tb.ToolboxId == toolbox.ToolboxId, toolbox);
-            return toolbox;
+            return await _toolboxCollection.FindOneAndReplaceAsync(tb => tb.ToolboxId == toolbox.ToolboxId, toolbox);
         }
 
-        public void Delete(string id)
+        public async Task Delete(string id)
         {
-            _toolboxCollection.DeleteOne(id);
+            await _toolboxCollection.DeleteOneAsync(cm => cm.ToolboxId == id);
         }
     }
 }

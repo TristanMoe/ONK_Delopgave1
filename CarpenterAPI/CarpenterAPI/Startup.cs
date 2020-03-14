@@ -26,7 +26,9 @@ namespace CarpenterAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<CraftmanService>();
+            services.AddScoped<CraftsmanService>();
+            services.AddScoped<ToolboxService>();
+            services.AddScoped<ToolService>();
             services.AddControllers();
         }
 
