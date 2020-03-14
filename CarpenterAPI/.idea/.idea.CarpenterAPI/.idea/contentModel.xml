@@ -10,12 +10,15 @@
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="CarpenterAPI.csproj" t="IncludeRecursive" />
+        <e p="CarpenterAPI.csproj.user~api" t="Include" />
         <e p="Configuration" t="Include">
           <e p="AppConfig.cs" t="Include" />
           <e p="ConfigurationHelper.cs" t="Include" />
         </e>
         <e p="Controllers" t="Include">
           <e p="CraftsmanController.cs" t="Include" />
+          <e p="ToolBoxController.cs" t="Include" />
+          <e p="ToolController.cs" t="Include" />
         </e>
         <e p="Database" t="Include">
           <e p="DataSeeder.cs" t="Include" />
@@ -38,7 +41,9 @@
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="Services" t="Include">
-          <e p="CraftmanService.cs" t="Include" />
+          <e p="CraftsmanService.cs" t="Include" />
+          <e p="ToolboxService.cs" t="Include" />
+          <e p="ToolService.cs" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
       </e>
