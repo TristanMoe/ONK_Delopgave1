@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Mathias\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Mathias\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CarpenterAPI.-370810096.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Mathias\Documents\6. semester\ITONK\Delprojekt_1\ONK_Delopgave1\CarpenterAPI" t="IncludeFlat">
+      <e p=".dockerignore" t="Include" />
+      <e p="CarpenterAPI" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CarpenterAPI.csproj" t="IncludeRecursive" />
+        <e p="Configuration" t="Include">
+          <e p="AppConfig.cs" t="Include" />
+          <e p="ConfigurationHelper.cs" t="Include" />
+        </e>
+        <e p="Controllers" t="Include">
+          <e p="CraftsmanController.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="DataSeeder.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="Craftsman.cs" t="Include" />
+          <e p="Tool.cs" t="Include" />
+          <e p="Toolbox.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="CarpenterAPI.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="CraftmanService.cs" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="CarpenterAPI.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
