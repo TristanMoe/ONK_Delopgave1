@@ -1,46 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using CarpenterAPI.Domain;
+using CarpenterAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarpenterAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tool")]
     [ApiController]
     public class ToolController : ControllerBase
     {
-        // GET: api/Tool
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ToolService _toolService;
+
+        public ToolController(ToolService toolService)
         {
-            return new string[] { "value1", "value2" };
+            _toolService = toolService;
         }
 
-        // GET: api/Tool/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/tool || api/tool?id=5
+        [HttpGet("{id?}")]
+        public async Task<IEnumerable<Tool>> Get([FromQuery] string id)
         {
-            return "value";
+            if (!Request.QueryString.HasValue)
+                return await _toolService.GetAll();
+
+            Tool tool = await _toolService.Get(id);
+            return new[] {tool};
         }
 
-        // POST: api/Tool
+        // POST: api/tool
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Tool> Post([FromBody] Tool tool)
         {
+            try
+            {
+                return await _toolService.Create(tool);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return tool;
         }
 
-        // PUT: api/Tool/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/tool
+        [HttpPut]
+        public async Task<Tool> Put([FromBody] Tool tool)
         {
+            return await _toolService.Update(tool);
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/tool/delete?id=5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete([FromQuery] string id)
         {
+            await _toolService.Delete(id);
         }
     }
 }

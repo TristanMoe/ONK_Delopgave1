@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CarpenterAPI.Domain;
 using CarpenterAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,29 +11,31 @@ namespace CarpenterAPI.Controllers
     [ApiController]
     public class CraftsmanController : ControllerBase
     {
-        private readonly CraftmanService _craftmanService;
+        private readonly CraftsmanService _craftsmanService;
 
-        public CraftsmanController(CraftmanService craftsmanService)
+        public CraftsmanController(CraftsmanService craftsmanService)
         {
-            _craftmanService = craftsmanService;
+            _craftsmanService = craftsmanService;
         }
 
+        // GET: api/craftsmen || api/craftsmen?id=5
         [HttpGet("{id?}")]
-        public IEnumerable<Craftsman> Get([FromQuery] string id)
+        public async Task<IEnumerable<Craftsman>> Get([FromQuery] string id)
         {
             if (!Request.QueryString.HasValue)
-                return _craftmanService.GetAll();
+                return await _craftsmanService.GetAll();
 
-            Craftsman cm = _craftmanService.Get(id);
+            Craftsman cm = await _craftsmanService.Get(id);
             return new[] {cm};
         }
 
+        // POST: api/craftsmen
         [HttpPost]
-        public Craftsman Post([FromBody] Craftsman craftsman)
+        public async Task<Craftsman> Post([FromBody] Craftsman craftsman)
         {
             try
             {
-                return _craftmanService.Create(craftsman);
+                return await _craftsmanService.Create(craftsman);
             }
             catch (Exception ex)
             {
@@ -41,16 +44,18 @@ namespace CarpenterAPI.Controllers
             return craftsman;
         }
 
-        [HttpPut("{id}")]
-        public Craftsman Put([FromQuery] string id, [FromBody] Craftsman craftsman)
+        // PUT: api/craftsmen
+        [HttpPut]
+        public async Task<Craftsman> Put([FromBody] Craftsman craftsman)
         {
-            return _craftmanService.Update(id, craftsman);
+            return await _craftsmanService.Update(craftsman);
         }
 
+        // DELETE: api/craftsmen/delete?id=5
         [HttpDelete("{id}")]
-        public void Delete([FromQuery] string id)
+        public async Task Delete([FromQuery] string id)
         {
-            _craftmanService.Delete(id);
+            await _craftsmanService.Delete(id);
         }
     }
 }
