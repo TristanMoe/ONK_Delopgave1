@@ -13,7 +13,7 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Toolbox.ID" />
+            <input type="hidden" asp-for="Toolbox.ToolboxId" />
             <div class="form-group">
                 <label asp-for="Toolbox.Purchased" class="control-label"></label>
                 <input asp-for="Toolbox.Purchased" class="form-control" />
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Toolbox.OwnerId" class="control-label"></label>
-                <input asp-for="Toolbox.OwnerId" class="form-control" />
+                <select asp-for="Toolbox.OwnerId" class="form-control" asp-items="@(new SelectList(@Model.Craftsmen, "CraftsmanId", "Surname"))"></select>
                 <span asp-validation-for="Toolbox.OwnerId" class="text-danger"></span>
             </div>
             <div class="form-group">

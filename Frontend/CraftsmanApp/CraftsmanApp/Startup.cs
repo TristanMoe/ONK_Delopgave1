@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Services;
 using CraftsmanApp.Configuration;
+using System.Text.Json;
 
 namespace CraftsmanApp
 {
@@ -33,19 +34,8 @@ namespace CraftsmanApp
             var baseAdd = "http://" + host + ":" + port + "/";
 
             services.AddHttpClient<CraftsmanClient>();
-            services.AddHttpClient("toolbox", c =>
-            {
-                c.BaseAddress = new Uri(baseAdd + "/api/toolbox/");
-
-                c.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-
-            services.AddHttpClient("tool", c =>
-            {
-                c.BaseAddress = new Uri(baseAdd + "/api/tool/");
-
-                c.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
+            services.AddHttpClient<ToolboxClient>();
+            services.AddHttpClient<ToolClient>();
 
             services.AddDbContext<CraftsmanAppContext>(options =>
                     options.UseInMemoryDatabase(databaseName: "testDatabase"));

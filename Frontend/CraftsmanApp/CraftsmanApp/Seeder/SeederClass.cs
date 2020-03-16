@@ -10,7 +10,7 @@ namespace CraftsmanApp.Seeder
     {
         public static CraftsmanApp.Models.Craftsman CraftsmanObj() => new Craftsman()
         {
-            ID = "hey",
+            CraftsmanId = "hey",
             EmploymentDate = DateTime.Now,
             Surname = "Jespersen",
             SubjectArea = "Shit",
@@ -22,7 +22,7 @@ namespace CraftsmanApp.Seeder
 
         public static CraftsmanApp.Models.Toolbox ToolBoxObj() => new Toolbox()
         {
-            ID = "heyToolBox",
+            ToolboxId = "heyToolBox",
             Purchased = DateTime.Now,
             Brand = "godtBrand",
             Model = "godMeodel",
@@ -34,7 +34,7 @@ namespace CraftsmanApp.Seeder
 
         public static CraftsmanApp.Models.Tool ToolObj() => new Tool()
         {
-            ID = "heyTool",
+            ToolId = "heyTool",
             Purchased = DateTime.Now,
             Owner = CraftsmanObj(),
             Brand = "toolbrand",

@@ -49,13 +49,17 @@ namespace CraftsmanApp.Pages.Craftsmen
                 return Page();
             }
 
-            var exists = _client.Get(Craftsman.ID);
+            var exists = await _client.Get(Craftsman.CraftsmanId);
             if (exists == null)
             {
                 await _client.Insert(Craftsman);
             }
-
-            await _client.Update(Craftsman.ID, Craftsman);
+            else
+            {
+                Craftsman.ToolBoxes = exists.ToolBoxes;
+            }
+            
+            await _client.Update(Craftsman.CraftsmanId, Craftsman);
 
             return RedirectToPage("./Index");
         }

@@ -7,7 +7,7 @@ namespace CraftsmanApp.Models
 {
     public class Toolbox
     {
-        public string ID { get; set; }
+        public string ToolboxId { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime Purchased { get; set; }
@@ -16,6 +16,6 @@ namespace CraftsmanApp.Models
         public string SerialNumber { get; set; }
         public string Type { get; set; }
         public string OwnerId { get; set; }
-        public List<Tool> Tools { get; set; }
+        public List<Tool> Tools { get; set; } = new List<Tool>();
     }
 }

@@ -8,20 +8,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Models;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp.Pages.Tools
 {
     public class EditModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
+        private readonly ToolClient _toolClient;
+        private readonly ToolboxClient _toolboxClient;
 
-        public EditModel(CraftsmanApp.Data.CraftsmanAppContext context)
+        public EditModel(ToolClient toolClient, ToolboxClient toolboxClient)
         {
-            _context = context;
+            _toolClient = toolClient;
+            _toolboxClient = toolboxClient;
         }
 
         [BindProperty]
         public Tool Tool { get; set; }
+
+        [BindProperty]
+        public List<Toolbox> ToolBox { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -30,7 +36,8 @@ namespace CraftsmanApp.Pages.Tools
                 return NotFound();
             }
 
-            Tool = await _context.Tool.FirstOrDefaultAsync(m => m.ID == id);
+            ToolBox = (await _toolboxClient.GetAll()).ToList();
+            Tool = await _toolClient.Get(id);
 
             if (Tool == null)
             {
@@ -48,30 +55,20 @@ namespace CraftsmanApp.Pages.Tools
                 return Page();
             }
 
-            _context.Attach(Tool).State = EntityState.Modified;
+            ToolBox = (await _toolboxClient.GetAll()).ToList();
+            var toolbox = ToolBox.First(toolbo => toolbo.ToolboxId == Tool.ToolBoxId);
+            toolbox.Tools.Add(Tool);
+            var exists = await _toolClient.Get(Tool.ToolId);
+            if (exists == null)
+            {
+                await _toolClient.Insert(Tool);
+            }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ToolExists(Tool.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _toolClient.Update(Tool.ToolId, Tool);
+            await _toolboxClient.Update(toolbox.ToolboxId, toolbox);
 
             return RedirectToPage("./Index");
         }
 
-        private bool ToolExists(string id)
-        {
-            return _context.Tool.Any(e => e.ID == id);
-        }
     }
 }

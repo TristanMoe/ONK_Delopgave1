@@ -5,7 +5,7 @@ namespace CraftsmanApp.Models
 {
     public class Tool
     {
-        public string ID { get; set; }
+        public string ToolId { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime Purchased { get; set; }

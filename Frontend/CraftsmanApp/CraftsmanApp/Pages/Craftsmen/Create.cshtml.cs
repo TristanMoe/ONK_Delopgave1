@@ -20,7 +20,6 @@ namespace CraftsmanApp.Pages.Craftsmen
 
         public IActionResult OnGet()
         {
-
             return Page();
         }
 

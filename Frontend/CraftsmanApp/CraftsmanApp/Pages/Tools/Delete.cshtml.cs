@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CraftsmanApp.Data;
 using CraftsmanApp.Models;
+using CraftsmanApp.Services;
 
 namespace CraftsmanApp.Pages.Tools
 {
     public class DeleteModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
+        private readonly ToolClient _toolClient;
 
-        public DeleteModel(CraftsmanApp.Data.CraftsmanAppContext context)
+        public DeleteModel(ToolClient toolClient)
         {
-            _context = context;
+            _toolClient = toolClient;
         }
 
         [BindProperty]
@@ -29,7 +30,7 @@ namespace CraftsmanApp.Pages.Tools
                 return NotFound();
             }
 
-            Tool = await _context.Tool.FirstOrDefaultAsync(m => m.ID == id);
+            Tool = await _toolClient.Get(id);
 
             if (Tool == null)
             {
@@ -45,12 +46,12 @@ namespace CraftsmanApp.Pages.Tools
                 return NotFound();
             }
 
-            Tool = await _context.Tool.FindAsync(id);
+            Tool = await _toolClient.Get(id);
 
             if (Tool != null)
             {
-                _context.Tool.Remove(Tool);
-                await _context.SaveChangesAsync();
+                await _toolClient.Delete(id);
+
             }
 
             return RedirectToPage("./Index");

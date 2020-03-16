@@ -18,15 +18,17 @@ namespace CarpenterAPI.Controllers
             _craftsmanService = craftsmanService;
         }
 
-        // GET: api/craftsmen || api/craftsmen?id=5
-        [HttpGet("{id?}")]
-        public async Task<IEnumerable<Craftsman>> Get([FromQuery] string id)
+        [HttpGet]
+        public async Task<IEnumerable<Craftsman>> Get()
         {
-            if (!Request.QueryString.HasValue)
-                return await _craftsmanService.GetAll();
-
+            return await _craftsmanService.GetAll();
+        }
+        // GET: api/craftsmen || api/craftsmen?id=5
+        [HttpGet("{id}")]
+        public async Task<Craftsman> Get(string id)
+        {
             Craftsman cm = await _craftsmanService.Get(id);
-            return new[] {cm};
+            return cm;
         }
 
         // POST: api/craftsmen
@@ -53,7 +55,7 @@ namespace CarpenterAPI.Controllers
 
         // DELETE: api/craftsmen/delete?id=5
         [HttpDelete("{id}")]
-        public async Task Delete([FromQuery] string id)
+        public async Task Delete(string id)
         {
             await _craftsmanService.Delete(id);
         }

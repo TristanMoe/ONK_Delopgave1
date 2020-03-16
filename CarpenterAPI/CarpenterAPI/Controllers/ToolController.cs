@@ -19,14 +19,17 @@ namespace CarpenterAPI.Controllers
         }
 
         // GET: api/tool || api/tool?id=5
-        [HttpGet("{id?}")]
-        public async Task<IEnumerable<Tool>> Get([FromQuery] string id)
+        [HttpGet]
+        public async Task<IEnumerable<Tool>> Get()
         {
-            if (!Request.QueryString.HasValue)
-                return await _toolService.GetAll();
+            return await _toolService.GetAll();
+        }
 
+        [HttpGet("{id}")]
+        public async Task<Tool> Get(string id)
+        {
             Tool tool = await _toolService.Get(id);
-            return new[] {tool};
+            return tool;
         }
 
         // POST: api/tool

@@ -19,14 +19,17 @@ namespace CarpenterAPI.Controllers
         }
 
         // GET: api/toolbox || api/toolbox?id=5
-        [HttpGet("{id?}")]
-        public async Task<IEnumerable<Toolbox>> Get([FromQuery] string id)
+        [HttpGet]
+        public async Task<IEnumerable<Toolbox>> Get()
         {
-            if (!Request.QueryString.HasValue)
-                return await _toolboxService.GetAll();
+            return await _toolboxService.GetAll(); 
+        }
 
+        [HttpGet("{id}")]
+        public async Task<Toolbox> Get(string id)
+        {
             Toolbox tb = await _toolboxService.Get(id);
-            return new[] {tb};
+            return tb;
         }
 
         // POST: api/toolbox
@@ -53,7 +56,7 @@ namespace CarpenterAPI.Controllers
 
         // DELETE: api/toolbox/delete?id=5
         [HttpDelete("{id}")]
-        public async Task Delete([FromQuery] string id)
+        public async Task Delete(string id)
         {
             await _toolboxService.Delete(id);
         }

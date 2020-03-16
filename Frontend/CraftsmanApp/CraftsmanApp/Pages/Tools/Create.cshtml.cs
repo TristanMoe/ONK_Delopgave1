@@ -7,26 +7,32 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CraftsmanApp.Data;
 using CraftsmanApp.Models;
+using CraftsmanApp.Services;
+using Microsoft.CodeAnalysis;
 
 namespace CraftsmanApp.Pages.Tools
 {
     public class CreateModel : PageModel
     {
-        private readonly CraftsmanApp.Data.CraftsmanAppContext _context;
+        private readonly ToolClient _toolClient;
+        private readonly ToolboxClient _toolboxClient;
 
-        public CreateModel(CraftsmanApp.Data.CraftsmanAppContext context)
+        public CreateModel(ToolClient toolClient, ToolboxClient toolboxClient)
         {
-            _context = context;
+            _toolClient = toolClient;
+            _toolboxClient = toolboxClient;
         }
 
         public IActionResult OnGet()
         {
-            ToolBox = _context.Toolbox.ToList();
+            ToolBox = _toolboxClient.GetAll().Result.ToList();
             
             return Page();
         }
 
+        [BindProperty]
         public List<Toolbox> ToolBox { get; set; }
+
         [BindProperty]
         public Tool Tool { get; set; }
 
@@ -39,8 +45,11 @@ namespace CraftsmanApp.Pages.Tools
                 return Page();
             }
 
-            _context.Tool.Add(Tool);
-            await _context.SaveChangesAsync();
+            ToolBox = (await _toolboxClient.GetAll()).ToList();
+            var toolbox = ToolBox.First(toolbo => toolbo.ToolboxId == Tool.ToolBoxId);
+            toolbox.Tools.Add(Tool);
+            await _toolClient.Insert(Tool);
+            await _toolboxClient.Update(toolbox.ToolboxId,toolbox);
 
             return RedirectToPage("./Index");
         }
