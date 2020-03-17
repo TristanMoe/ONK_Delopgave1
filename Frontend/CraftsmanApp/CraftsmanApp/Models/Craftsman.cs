@@ -6,6 +6,10 @@ namespace CraftsmanApp.Models
 {
     public class Craftsman
     {
+        [RegularExpression(@"[0-9]*$")]
+        [StringLength(24, MinimumLength = 24)]
+        [Required]
+        [Display(Name = "Craftsman Id")]
         public string CraftsmanId { get; set; }
 
         [DataType(DataType.Date)]

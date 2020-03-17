@@ -7,6 +7,10 @@ namespace CraftsmanApp.Models
 {
     public class Toolbox
     {
+        [RegularExpression(@"[0-9]*$")]
+        [StringLength(24, MinimumLength = 24)]
+        [Required]
+        [Display(Name = "Toolbox Id")]
         public string ToolboxId { get; set; }
 
         [DataType(DataType.Date)]
