@@ -1,4 +1,5 @@
-﻿using CarpenterAPI.Domain;
+﻿using CarpenterAPI.Configuration;
+using CarpenterAPI.Domain;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System;
@@ -13,7 +14,7 @@ namespace CarpenterAPI.Services
         
         public CraftsmanService(IConfiguration configuration)
         {
-            var mongoClient = new MongoClient(configuration.GetConnectionString("CraftsmanDb"));
+            var mongoClient = new MongoClient(AppConfig.ConnectionStringDb);
             var database = mongoClient.GetDatabase("CraftsmanDb");
             _craftsmenCollection = database.GetCollection<Craftsman>("Craftsmen");
         }

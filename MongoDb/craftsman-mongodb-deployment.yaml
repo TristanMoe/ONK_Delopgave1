@@ -5,16 +5,16 @@ metadata:
     deployment.kubernetes.io/revision: "1"
   generation: 1
   labels:
-    app: carpenter-mongodb
-  name: carpenter-mongodb
-  namespace: default
+    app: craftsman-mongodb
+  name: craftsman-mongodb
+  namespace: craftsman
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: carpenter-mongodb
+      app: craftsman-mongodb
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -24,7 +24,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: carpenter-mongodb
+        app: craftsman-mongodb
     spec:
       volumes:
       - name: mongodb-data
@@ -51,16 +51,16 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: carpenter-mongodb
-  name: carpenter-mongodb-balancer
-  namespace: default
+    app: craftsman-mongodb
+  name: craftsman-mongodb-balancer
+  namespace: craftsman
 spec:
-  externalTrafficPolicy: Cluster
+  clusterIP: 10.0.14.196
   ports:
   - port: 8080
     protocol: TCP
-    targetPort: 80
+    targetPort: 27017
   selector:
-    app: carpenter-mongodb
+    app: craftsman-mongodb
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
