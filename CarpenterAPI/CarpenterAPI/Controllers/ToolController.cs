@@ -56,7 +56,7 @@ namespace CarpenterAPI.Controllers
 
         // DELETE: api/tool/delete?id=5
         [HttpDelete("{id}")]
-        public async Task Delete([FromQuery] string id)
+        public async Task Delete(string id)
         {
             await _toolService.Delete(id);
         }
